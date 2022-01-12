@@ -8,35 +8,30 @@ namespace OOPAssignment.Base
         public CarStringCommandExecutor(ICarCommand CarCommand) : base(CarCommand)
         {
         }
+
         public void ExecuteCommand(string commandObject)
         {
-            if (commandObject == null || commandObject == string.Empty)
-            {
+            if (string.IsNullOrEmpty(commandObject))
                 throw new Exception();
-            }
-            else
+
+
+            foreach (char command in commandObject)
             {
-                foreach (char command in commandObject)
+                switch (command)
                 {
-                    if (command == 'M')
-                    {
+                    case 'M':
                         CarCommand.Move();
-                    }
-                    else if (command == 'R')
-                    {
+                        break;
+                    case 'R':
                         CarCommand.TurnRight();
-                    }
-                    else if (command == 'L')
-                    {
+                        break;
+                    case 'L':
                         CarCommand.TurnLeft();
-                    }
-                    else
-                    {
+                        break;
+                    default:
                         throw new Exception();
-                    }
                 }
             }
-
 
         }
     }
